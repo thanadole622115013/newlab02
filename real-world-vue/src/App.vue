@@ -49,4 +49,7 @@ header{
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+h4 {
+  font-size: 20px;
+}
 </style>
