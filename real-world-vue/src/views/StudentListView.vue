@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import EventCard from '../components/EventCard.vue'
-
+import StudentCard from '@/components/StudentCard.vue'
 import type { EventItem } from '@/type';
-import EventService from '../services/EventService'
+import StudentService from '../services/StudentService'
 import { ref } from 'vue'
 
-const events = ref<EventItem[]>([])
+const students = ref<EventItem[]>([])
 
-EventService.getEvent()
+StudentService.getStudent()
   .then((response) => {
-    events.value = response.data
+    students.value = response.data
     console.log(response.data)
   })
 
 </script>
 
 <template>
-  <h1>Events For Good</h1>
+  <h1>Student List</h1>
   <main class="events">
-    <EventCard v-for="event in events" :key="event.id" :event="event"></EventCard>
+    <StudentCard v-for="student in students" :key="student.id" :student="student"></StudentCard>
     <!-- <EventCardCO v-for="event in events" :key="event.id" :event="event"></EventCardCO> -->
   </main>
 </template>
