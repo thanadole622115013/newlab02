@@ -3,7 +3,7 @@ import type { AxiosInstance, AxiosResponse } from 'axios'
 import type { EventItem } from '@/type'
 
 const apiClient: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:3004',
+    baseURL: 'https://my-json-server.typicode.com/se331-2022/passengerdb/passenger?_page=1&_limit=5',
     withCredentials: false,
     headers: {
         Accept: 'application/json',
@@ -16,6 +16,6 @@ export default {
         return apiClient.get<EventItem[]>('/events?_limit=' + perPage + '&_page=' + page)
     },
     getEventById(id: number): Promise<AxiosResponse<EventItem>>{
-        return apiClient.get<EventItem>('events/' + id.toString())
+        return apiClient.get<EventItem>('https://my-json-server.typicode.com/se331-2022/passengerdb/passenger/' + id.toString())
     }
 }

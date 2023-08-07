@@ -34,7 +34,7 @@ const router = createRouter({
       component: StudentListView
     },
     {
-      path: '/event/:id',
+      path: '/https://my-json-server.typicode.com/se331-2022/passengerdb/passenger/:id',
       name: 'event-detail',
       component: EventDetailView,
       props: true
