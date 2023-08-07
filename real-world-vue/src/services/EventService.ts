@@ -16,6 +16,6 @@ export default {
         return apiClient.get<EventItem[]>('/events?_limit=' + perPage + '&_page=' + page)
     },
     getEventById(id: number): Promise<AxiosResponse<EventItem>>{
-        return apiClient.get<EventItem>('events/' + id.toString())
+        return apiClient.get<EventItem>('https://my-json-server.typicode.com/se331-2022/passengerdb/passenger/' + id.toString())
     }
 }

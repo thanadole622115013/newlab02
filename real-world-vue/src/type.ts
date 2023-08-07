@@ -5,7 +5,7 @@ export interface EventItem {
     email: string
     gender: string
     ip_address: string
-    Scouce: string
+    Source: string
     Destination: string
     travelDate: string
     airlineId: number     
