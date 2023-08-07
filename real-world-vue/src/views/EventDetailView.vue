@@ -38,8 +38,8 @@ EventService.getEventById(Number(props.id))
       |
       <Router-link :to="{ name: 'event-edit', params: { id }}">Edit</Router-link>
     </div>
-    <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-    <p>{{ event?.description }}</p>
+    <p>{{ event.first_name + " " + event.last_name}}   @ {{ event.location }}</p>
+    <p>{{ event?.email }}</p>
   </div>
 </template>
 

@@ -1,17 +1,12 @@
 export interface EventItem {
     id: number
-    category: string
-    title: string
-    description: string
-    location: string
-    date: string
-    time: string
-    petsAllowed: boolean
-    organizer: string
-    studentId: string
-    name: string
-    surname: string
-    gpa: number
-    penAmount: number
-     
+    first_name: string
+    last_name: string
+    email: string
+    gender: string
+    ip_address: string
+    Scouce: string
+    Destination: string
+    travelDate: string
+    airlineId: number     
 }
