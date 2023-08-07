@@ -23,7 +23,6 @@ EventService.getEventById(Number(props.id))
     } else {
       router.push({ name: 'network-error'})
     }
-    
 })
 
 </script>
@@ -38,8 +37,7 @@ EventService.getEventById(Number(props.id))
       |
       <Router-link :to="{ name: 'event-edit', params: { id }}">Edit</Router-link>
     </div>
-    <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-    <p>{{ event?.description }}</p>
+    <p>Edit the event here</p>
   </div>
 </template>
 

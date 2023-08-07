@@ -1,10 +1,8 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 
 import { ref } from 'vue'
-import type { Ref } from 'vue'
 import type { EventItem } from '@/type'
 import EventService from '@/services/EventService'
-import { useRouter } from 'vue-router'
 import { RouterLink, RouterView } from 'vue-router'
 
 const event = ref<EventItem | null> (null)
@@ -12,18 +10,11 @@ const props = defineProps({
     id: String
 })
 
-const router = useRouter()
 EventService.getEventById(Number(props.id))
 .then((response) => {
     event.value = response.data
 }).catch(error => {
     console.log(error)
-    if( error.response && error.response.status === 404){
-      router.push({ name: '404-resource', params: { resource: 'event' }})
-    } else {
-      router.push({ name: 'network-error'})
-    }
-    
 })
 
 </script>
@@ -38,9 +29,8 @@ EventService.getEventById(Number(props.id))
       |
       <Router-link :to="{ name: 'event-edit', params: { id }}">Edit</Router-link>
     </div>
-    <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-    <p>{{ event?.description }}</p>
+    <RouterView :event="event"></RouterView>
   </div>
 </template>
 
-
+ -->
