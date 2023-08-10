@@ -1,43 +1,41 @@
 <script setup lang="ts">
-
-import { ref } from 'vue'
-import type { Ref } from 'vue'
+import type { PropType } from 'vue'
 import type { EventItem } from '@/type'
-import EventService from '@/services/EventService'
+
 import { useRouter } from 'vue-router'
 import { RouterLink, RouterView } from 'vue-router'
+import { useMessageStore } from '@/stores/message'
 
-const event = ref<EventItem | null> (null)
 const props = defineProps({
-    id: String
+    event: {
+      type: Object as PropType<EventItem>,
+        require: true
+    }
 })
 
 const router = useRouter()
-EventService.getEventById(Number(props.id))
-.then((response) => {
-    event.value = response.data
-}).catch(error => {
-    console.log(error)
-    if( error.response && error.response.status === 404){
-      router.push({ name: '404-resource', params: { resource: 'event' }})
-    } else {
-      router.push({ name: 'network-error'})
-    }
+const store = useMessageStore()
+
+function register(){
+
+store.updateMesage('You are successfully registered for ' + props.event?.first_name)
+setTimeout(() => {
+  store.resetMessage()
+}, 3000)
+router.push({
+  name: 'event-detail',
+  params: {
+    id: [props.event?.id]
+  }
 })
+}
 
 </script>
 
 <template>
   <div v-if="event">
-    <h1>{{ event.title }}</h1>
-    <div id="nav">
-      <Router-link :to="{ name: 'event-detail', params: { id }}">Details</Router-link>
-      |
-      <Router-link :to="{ name: 'event-register', params: { id }}">Register</Router-link>
-      |
-      <Router-link :to="{ name: 'event-edit', params: { id }}">Edit</Router-link>
-    </div>
     <p>Registration from here</p>
+    <button @click="register">Register Me</button>
   </div>
 </template>
 

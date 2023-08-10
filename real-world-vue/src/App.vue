@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { useMessageStore } from './stores/message';
+import { storeToRefs } from 'pinia';
+const store = useMessageStore()
+const { message } = storeToRefs(store)
 </script>
 
 <template>
@@ -53,5 +57,17 @@ header{
 }
 h4 {
   font-size: 20px;
+}
+
+@keyframes yellowfade {
+  from {
+    background: yellow;
+  }
+  to {
+    background: transparent;
+  }
+}
+#flashMessage {
+  animation: yellowfade 3s ease-in-out;
 }
 </style>

@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import EventCard from '../components/EventCard.vue'
-
+import NProgress from 'nprogress'
+import { useRouter } from 'vue-router';
 import type { EventItem } from '@/type';
 import EventService from '../services/EventService'
 import { computed, ref, watchEffect } from 'vue'
 import { AxiosResponse } from 'axios';
+import router from '@/router';
+import { onBeforeRouteUpdate } from 'vue-router';
 
 const events = ref<EventItem[]>([])
 
 const totalEvent = ref<number>(0)
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvent.value /2)
+  const totalPages = Math.ceil(totalEvent.value /3)
   return props.page.valueOf() <totalPages
 })
 const props = defineProps({
@@ -20,13 +23,26 @@ const props = defineProps({
   }
 })
 
-watchEffect(() => {
-  EventService.getEvent(2, props.page).then((response: AxiosResponse<EventItem[]>) => {
+
+  EventService.getEvent(3, props.page).then((response: AxiosResponse<EventItem[]>) => {
     events.value = response.data
     totalEvent.value = response.headers['x-total-count']
     console.log(response.data)
+  }).catch(() => {
+    router.push({ name: 'NetworkError' })
   })
-})
+
+  onBeforeRouteUpdate((to, from, next) => {
+    const toPage = Number(to.query.page)
+  
+    EventService.getEvent(3, toPage).then((response: AxiosResponse<EventItem[]>) => {
+    events.value = response.data
+    totalEvent.value = response.headers['x-total-count']
+    next()
+  }).catch(() => {
+    next({ name: 'NetworkError' })
+  })
+  })
 
 
 

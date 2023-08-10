@@ -1,27 +1,21 @@
-<!-- <script setup lang="ts">
+<script setup lang="ts">
 
 import { ref } from 'vue'
-import type { EventItem } from '@/type'
-import EventService from '@/services/EventService'
 import { RouterLink, RouterView } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useEventStore } from '@/stores/event'
+import { storeToRefs } from 'pinia'
 
-const event = ref<EventItem | null> (null)
-const props = defineProps({
-    id: String
-})
-
-EventService.getEventById(Number(props.id))
-.then((response) => {
-    event.value = response.data
-}).catch(error => {
-    console.log(error)
-})
+const store = useEventStore()
+const event = storeToRefs(store).event
+const id = ref(event?.value?.id)
+const router = useRouter()
 
 </script>
 
 <template>
   <div v-if="event">
-    <h1>{{ event.title }}</h1>
+    <h1>{{ event.first_name }}</h1>
     <div id="nav">
       <Router-link :to="{ name: 'event-detail', params: { id }}">Details</Router-link>
       |
@@ -33,4 +27,4 @@ EventService.getEventById(Number(props.id))
   </div>
 </template>
 
- -->
+
